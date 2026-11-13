@@ -1,0 +1,16 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+build/
+dist/
+*.exe
+*.log
+settings.json
+startup-error.log
+test-results/
+DEVELOPMENT_LOG.md
+SHA256SUMS.txt
+**/DISTRIBUTION_METADATA.txt
+TEST_REPORT.md

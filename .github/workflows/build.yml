@@ -1,0 +1,28 @@
+name: Build Windows application
+on:
+  workflow_dispatch:
+  push:
+    tags: ['v*']
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          cache: pip
+      - run: python -m pip install -r requirements-dev.txt
+      - run: python -m pytest -q -m "not desktop"
+      - run: python -m PyInstaller --noconfirm MouseMeasure.spec
+      - uses: actions/upload-artifact@v4
+        with:
+          name: MouseMeasure-Windows-x64
+          path: |
+            dist/MouseMeasure.exe
+            LICENSE
+            THIRD_PARTY_NOTICES.md
+            README.md
+            third_party_licenses/
