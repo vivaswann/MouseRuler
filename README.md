@@ -6,6 +6,10 @@ MouseMeasure is a local Windows utility for measuring displacement with an optic
 mouse. Take a crooked path between two points and read the straight distance
 between them, separately from the path you travelled.
 
+**[Download the Windows application](https://github.com/vivaswann/MouseMeasure/releases/download/v1.2.0/MouseMeasure-Windows-1.2.0.zip)**
+— extract the ZIP and open `MouseMeasure.exe`. No Python installation is needed.
+See the [release notes and checksums](https://github.com/vivaswann/MouseMeasure/releases/tag/v1.2.0).
+
 ![The first-launch measuring guide](docs/guide-1.png)
 
 ## Start measuring
