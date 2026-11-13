@@ -1,9 +1,11 @@
 # MouseRuler
-### No ruler? Put your mouse to work.
+### Measure without a ruler. Put your mouse to work.
 
 Turn an ordinary optical mouse into a physical measuring tool. MouseRuler reads
 raw sensor movement, bypassing Windows pointer acceleration, to estimate the
 distance between two points—even when you take a crooked path.
+
+**[Website & quick guide](https://vivaswann.github.io/MouseRuler/)** · [How to measure without a ruler](https://vivaswann.github.io/MouseRuler/how-to-measure-without-a-ruler.html)
 
 ## Quick Start
 
