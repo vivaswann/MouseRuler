@@ -185,7 +185,7 @@ class WelcomeGuide(QDialog):
         super().__init__(parent)
         self.settings = settings
         self.step = 0
-        self.setWindowTitle("A quick guide to MouseMeasure")
+        self.setWindowTitle("A quick guide to MouseRuler")
         self.resize(880, 640)
         self.setMinimumSize(760, 600)
         self.setModal(True)

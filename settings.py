@@ -5,14 +5,15 @@ import os
 from pathlib import Path
 
 from calibration import CalibrationProfile
+from legacy import LEGACY_DATA_DIRECTORY, legacy_data_override
 
 
 def default_settings_path():
-    override = os.environ.get("MOUSEMEASURE_DATA_DIR")
+    override = os.environ.get("MOUSERULER_DATA_DIR") or legacy_data_override()
     return (
         Path(
             override
-            or (Path(os.environ.get("LOCALAPPDATA", Path.home())) / "MouseMeasure")
+            or (Path(os.environ.get("LOCALAPPDATA", Path.home())) / "MouseRuler")
         )
         / "settings.json"
     )
@@ -29,13 +30,32 @@ class Settings:
         self.dpi_profiles = {}
         self.warning = ""
         self.show_guide = True
-        self.load()
+        source = self.path
+        if (
+            path is None
+            and not source.exists()
+            and not (os.environ.get("MOUSERULER_DATA_DIR") or legacy_data_override())
+        ):
+            previous = (
+                Path(os.environ.get("LOCALAPPDATA", Path.home()))
+                / LEGACY_DATA_DIRECTORY
+                / "settings.json"
+            )
+            if previous.exists():
+                source = previous
+        self.load(source)
+        if source != self.path and not self.warning:
+            try:
+                self.save()
+            except OSError as exc:
+                self.warning = f"Loaded existing settings, but could not save the migrated profile: {exc}"
 
-    def load(self):
-        if not self.path.exists():
+    def load(self, source=None):
+        source = Path(source) if source else self.path
+        if not source.exists():
             return
         try:
-            obj = json.loads(self.path.read_text(encoding="utf-8"))
+            obj = json.loads(source.read_text(encoding="utf-8"))
             if obj.get("version") != 1:
                 raise ValueError("Unknown settings version")
             if obj.get("unit") not in ("mm", "cm", "m", "in"):

@@ -7,6 +7,8 @@ import sys
 import traceback
 from pathlib import Path
 
+from legacy import legacy_data_override
+
 
 def launch():
     try:
@@ -16,8 +18,9 @@ def launch():
     except Exception:
         detail = traceback.format_exc()
         directory = Path(
-            os.environ.get("MOUSEMEASURE_DATA_DIR")
-            or (Path(os.environ.get("LOCALAPPDATA", Path.home())) / "MouseMeasure")
+            os.environ.get("MOUSERULER_DATA_DIR")
+            or legacy_data_override()
+            or (Path(os.environ.get("LOCALAPPDATA", Path.home())) / "MouseRuler")
         )
         log_path = directory / "startup-error.log"
         try:
@@ -46,8 +49,8 @@ def launch():
         elif os.name == "nt":
             ctypes.windll.user32.MessageBoxW(
                 None,
-                f"MouseMeasure could not start.\n\n{detail}\nDetails: {log_path}",
-                "MouseMeasure startup error",
+                f"MouseRuler could not start.\n\n{detail}\nDetails: {log_path}",
+                "MouseRuler startup error",
                 0x10,
             )
         if sys.stderr:

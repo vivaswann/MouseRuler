@@ -1,4 +1,4 @@
-"""MouseMeasure — Windows sensor-count measurement utility."""
+"""MouseRuler — Windows sensor-count measurement utility."""
 
 import argparse
 import json
@@ -42,7 +42,7 @@ from measurement_state import Measurement, State
 from settings import Settings
 from visualization import TrajectoryCanvas
 
-VERSION = "1.2.0"
+VERSION = "1.3.0"
 
 
 def label(text, name=None, wrap=False):
@@ -79,7 +79,7 @@ class MainWindow(QMainWindow):
         self._dirty = True
         self._last_state = None
         self._last_diag = 0.0
-        self.setWindowTitle("MouseMeasure")
+        self.setWindowTitle("MouseRuler")
         self.setMinimumSize(960, 730)
         self.resize(1280, 850)
         self.router = InputRouter(self.measurement, self.command)
@@ -128,7 +128,7 @@ class MainWindow(QMainWindow):
         mark.setFixedSize(44, 40)
         mark.setAlignment(Qt.AlignmentFlag.AlignCenter)
         nav.addWidget(mark)
-        nav.addWidget(label("MouseMeasure", "brand"))
+        nav.addWidget(label("MouseRuler", "brand"))
         nav.addStretch()
         self.nav_buttons = []
         for i, text in enumerate(("Measurement", "Calibration", "Settings")):
@@ -484,7 +484,7 @@ class MainWindow(QMainWindow):
         row.addWidget(button("Export diagnostics", self.export_diagnostics))
         row.addStretch()
         row.addWidget(
-            label(f"MouseMeasure {VERSION} · Local only · No telemetry", "muted")
+            label(f"MouseRuler {VERSION} · Local only · No telemetry", "muted")
         )
         layout.addLayout(row)
         return page
@@ -676,7 +676,7 @@ class MainWindow(QMainWindow):
             )
             return
         if self._requires_raw and self.isVisible() and not self.isActiveWindow():
-            self.notice("Bring MouseMeasure to the foreground before recording.")
+            self.notice("Bring MouseRuler to the foreground before recording.")
             return
         if self.measurement.state == State.RECORDING:
             self.measurement.finish()
@@ -1064,7 +1064,7 @@ class MainWindow(QMainWindow):
         filename, _ = QFileDialog.getSaveFileName(
             self,
             "Save diagnostics locally",
-            "MouseMeasure-diagnostics.json",
+            "MouseRuler-diagnostics.json",
             "JSON (*.json)",
         )
         if filename:
@@ -1076,7 +1076,7 @@ class MainWindow(QMainWindow):
         filename, _ = QFileDialog.getSaveFileName(
             self,
             "Save measurement locally",
-            "MouseMeasure-measurement.json",
+            "MouseRuler-measurement.json",
             "JSON (*.json)",
         )
         if filename:
@@ -1124,7 +1124,7 @@ class MainWindow(QMainWindow):
             if self.cursor_capture.active and not self.isActiveWindow():
                 self.cursor_capture.release(restore_previous=False)
                 self.tracking_error(
-                    "Recording interrupted: MouseMeasure lost focus. Cursor released; reset and measure again."
+                    "Recording interrupted: MouseRuler lost focus. Cursor released; reset and measure again."
                 )
 
     def closeEvent(self, event):
@@ -1139,7 +1139,7 @@ class MainWindow(QMainWindow):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="MouseMeasure — calibrated Windows Raw Input measurement"
+        description="MouseRuler — calibrated Windows Raw Input measurement"
     )
     parser.add_argument(
         "--windowed",
@@ -1155,14 +1155,14 @@ def main():
     args = parser.parse_args()
     pg.setConfigOptions(antialias=True)
     app = QApplication(sys.argv[:1])
-    app.setApplicationName("MouseMeasure")
-    app.setOrganizationName("MouseMeasure")
+    app.setApplicationName("MouseRuler")
+    app.setOrganizationName("MouseRuler")
     app.setFont(QFont("Segoe UI", 10))
     settings = Settings()
     try:
         settings.path.parent.mkdir(parents=True, exist_ok=True)
         handler = RotatingFileHandler(
-            settings.path.parent / "MouseMeasure.log",
+            settings.path.parent / "MouseRuler.log",
             maxBytes=2_000_000,
             backupCount=1,
             encoding="utf-8",
@@ -1189,7 +1189,7 @@ def main():
     icon_path = (
         Path(getattr(sys, "_MEIPASS", Path(__file__).parent))
         / "assets"
-        / "MouseMeasure.ico"
+        / "MouseRuler.ico"
     )
     if icon_path.exists():
         app.setWindowIcon(QIcon(str(icon_path)))

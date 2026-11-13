@@ -1,6 +1,6 @@
 # Contributing
 
-MouseMeasure welcomes bug reports, usability improvements, and measurement research.
+MouseRuler welcomes bug reports, usability improvements, and measurement research.
 
 Use Python 3.13 on Windows 11. Create a virtual environment and install
 `requirements-dev.txt`, then run:

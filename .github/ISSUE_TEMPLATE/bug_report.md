@@ -11,7 +11,7 @@ about: Report a reproducible application problem
 
 ## Environment
 
-- MouseMeasure version:
+- MouseRuler version:
 - Windows version and display scaling:
 - Mouse model and selected hardware DPI:
 - DPI estimate or ruler calibration:

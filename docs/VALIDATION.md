@@ -1,10 +1,12 @@
 # Validation scope
 
-The version-1.2 development run passed **130 tests**, including the actual Windows
+The version-1.3 development run passed **135 tests**, including the actual Windows
 Raw Input registration test and a brief native cursor-confinement/restoration test.
 Formatting and unused-import checks are performed with Ruff. Six onboarding tests
 cover lesson navigation, first-run preference, animation pause/lifecycle, explanatory
-content, measurement isolation, and the recording-state guard.
+content, measurement isolation, and the recording-state guard. Five rename tests
+verify visible branding, profile migration, profile precedence, explicit-path
+isolation, and environment-variable compatibility.
 
 The GitHub workflow excludes the `desktop` test because hosted runners may not
 provide interactive desktop permissions. Run the full suite on an interactive

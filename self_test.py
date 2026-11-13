@@ -29,7 +29,7 @@ def run(app, report_path):
         report["checks"].append(name)
 
     try:
-        with tempfile.TemporaryDirectory(prefix="MouseMeasure-test-") as temp:
+        with tempfile.TemporaryDirectory(prefix="MouseRuler-test-") as temp:
             window = MainWindow(Settings(Path(temp) / "settings.json"))
             check(
                 "Native Windows Raw Input registration",

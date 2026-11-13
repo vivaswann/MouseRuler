@@ -16,12 +16,12 @@ jobs:
           cache: pip
       - run: python -m pip install -r requirements-dev.txt
       - run: python -m pytest -q -m "not desktop"
-      - run: python -m PyInstaller --noconfirm MouseMeasure.spec
+      - run: python -m PyInstaller --noconfirm MouseRuler.spec
       - uses: actions/upload-artifact@v4
         with:
-          name: MouseMeasure-Windows-x64
+          name: MouseRuler-Windows-x64
           path: |
-            dist/MouseMeasure.exe
+            dist/MouseRuler.exe
             LICENSE
             THIRD_PARTY_NOTICES.md
             README.md

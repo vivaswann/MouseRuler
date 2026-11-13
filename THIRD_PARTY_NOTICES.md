@@ -1,6 +1,6 @@
 # Third-party notices
 
-MouseMeasure source is MIT licensed. Its executable bundles CPython, Qt/PySide6, NumPy, PyQtGraph, PySerial and associated runtime components. Original license files and distribution metadata are retained in `third_party_licenses/`.
+MouseRuler source is MIT licensed. Its executable bundles CPython, Qt/PySide6, NumPy, PyQtGraph, PySerial and associated runtime components. Original license files and distribution metadata are retained in `third_party_licenses/`.
 
 | Distribution | Version | License metadata |
 | --- | --- | --- |

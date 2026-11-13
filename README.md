@@ -1,7 +1,7 @@
-# MouseMeasure
+# MouseRuler
 ### No ruler? Put your mouse to work.
 
-Turn an ordinary optical mouse into a physical measuring tool. MouseMeasure reads
+Turn an ordinary optical mouse into a physical measuring tool. MouseRuler reads
 raw sensor movement, bypassing Windows pointer acceleration, to estimate the
 distance between two points—even when you take a crooked path.
 
@@ -16,10 +16,10 @@ distance between two points—even when you take a crooked path.
 
 ## Download & run
 
-**[↓ Download for Windows](https://github.com/vivaswann/MouseMeasure/releases/download/v1.2.0/MouseMeasure-Windows-1.2.0.zip)**
+**[↓ Download for Windows](https://github.com/vivaswann/MouseRuler/releases/download/v1.3.0/MouseRuler-Windows-1.3.0.zip)**
 
-Extract the ZIP and open `MouseMeasure.exe`. **No Python installation required.**
-Windows 11 x64 · [Release notes & checksums](https://github.com/vivaswann/MouseMeasure/releases/tag/v1.2.0)
+Extract the ZIP and open `MouseRuler.exe`. **No Python installation required.**
+Windows 11 x64 · [Release notes & checksums](https://github.com/vivaswann/MouseRuler/releases/tag/v1.3.0)
 
 ## Same mark. Same direction.
 
@@ -43,8 +43,8 @@ Keep the mouse’s orientation unchanged. The built-in guide walks you through i
 <summary><strong>Run from source</strong></summary>
 
 ```powershell
-git clone https://github.com/vivaswann/MouseMeasure.git
-cd MouseMeasure
+git clone https://github.com/vivaswann/MouseRuler.git
+cd MouseRuler
 py -3.13 -m venv .venv
 .venv\Scripts\python.exe -m pip install -r requirements-dev.txt
 .venv\Scripts\python.exe bootstrap.py

@@ -1,10 +1,10 @@
-# Using MouseMeasure
+# Using MouseRuler
 
 A Windows 11 x64 utility that measures mouse-sensor displacement using Windows Raw Input. It draws the reported trajectory and shows **direct endpoint distance separately from travelled path length**.
 
 ## Launch and first measurement
 
-Open **MouseMeasure.exe**, or **Launch MouseMeasure.bat**. The executable needs no Python installation and runs offline. It starts maximized; `MouseMeasure.exe --windowed` opens a resizable window. The executable is unsigned.
+Open **MouseRuler.exe**, or **Launch MouseRuler.bat**. The executable needs no Python installation and runs offline. It starts maximized; `MouseRuler.exe --windowed` opens a resizable window. The executable is unsigned.
 
 1. Move the mouse you intend to measure with, then choose **Set mouse DPI**. An unknown mouse also prompts for DPI when you try to start.
 2. The app attempts a read-only HID physical-resolution query. If available, it prefills the reported value for confirmation. Otherwise, enter the hardware DPI currently selected in your mouse software/on the mouse. An initial 800 when no value is known is an editable example, **not a detected value or an assumed measurement scale**.
@@ -12,7 +12,7 @@ Open **MouseMeasure.exe**, or **Launch MouseMeasure.bat**. The executable needs 
 4. Move along your desired path without rotating or lifting the mouse. At the physical endpoint, **double-left-click** again. Recording stops and the cursor reappears.
 5. Read the direct distance and longer travelled path. Both lengths appear below the graph in **mm, cm, m, and inches simultaneously**, alongside the primary result in your preferred unit.
 
-Do not hold a button down during movement: start and finish are separate double-click gestures. **Enter** starts/finishes, **Escape** cancels and releases the cursor, and **R** resets. Keep MouseMeasure in front. Switching to another app releases the cursor and stops the recording with a partial-trace error. Finish/cancel before using other mouse controls. Movement continues contributing raw sensor counts beyond the pointer's confined range.
+Do not hold a button down during movement: start and finish are separate double-click gestures. **Enter** starts/finishes, **Escape** cancels and releases the cursor, and **R** resets. Keep MouseRuler in front. Switching to another app releases the cursor and stops the recording with a partial-trace error. Finish/cancel before using other mouse controls. Movement continues contributing raw sensor counts beyond the pointer's confined range.
 
 ## DPI estimates and automatic detection
 
@@ -65,7 +65,7 @@ Settings offers serial yaw at 115200 baud, at least 20 Hz, UTF-8 JSON lines such
 
 Diagnostics includes raw counts, packet/sample counts, device, state, DPI profile, scale source/coefficient, cursor-capture state, click thresholds, last event, and errors. Completed JSON measurements include direct/path values in all four units. Partial traces are labelled and cannot export as completed results. Data stays local; there is no telemetry. Diagnostic files contain device identifiers, so review before sharing.
 
-Atomic settings/DPI/calibration: `%LOCALAPPDATA%\MouseMeasure\settings.json`. Runtime errors use a rotating `MouseMeasure.log`; import-time failures use `startup-error.log`. `MOUSEMEASURE_DATA_DIR` selects an isolated profile. Old version-1 settings remain readable, with new DPI data defaulting to empty and existing ruler profiles preserved.
+Atomic settings/DPI/calibration: `%LOCALAPPDATA%\MouseRuler\settings.json`. Runtime errors use a rotating `MouseRuler.log`; import-time failures use `startup-error.log`. `MOUSERULER_DATA_DIR` selects an isolated profile. Existing profiles from before the rename migrate automatically when no new profile exists; the original file is never modified. Explicit profile paths remain isolated.
 
 ## Source, tests, and rebuilding
 
@@ -84,7 +84,7 @@ The batch launcher installs runtime dependencies into `.venv` if no executable e
 Run the executable's hidden software integration test with:
 
 ```powershell
-MouseMeasure.exe --self-test --report packaged-test.json
+MouseRuler.exe --self-test --report packaged-test.json
 ```
 
 It uses temporary settings, does not display synthetic results or change user profiles, and explicitly says physical accuracy was not tested. See TEST_REPORT.md, DEVELOPMENT_LOG.md, test-results/, and SHA256SUMS.txt. The source includes the requested modules plus dpi_detection.py, cursor_capture.py, heading_input.py, bootstrap.py, and self_test.py. Third-party licenses are included.
