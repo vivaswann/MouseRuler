@@ -1,46 +1,46 @@
 # MouseMeasure
+### No ruler? Put your mouse to work.
 
-**An ordinary mouse. A different kind of ruler.**
+Turn an ordinary optical mouse into a physical measuring tool. MouseMeasure reads
+raw sensor movement, bypassing Windows pointer acceleration, to estimate the
+distance between two points—even when you take a crooked path.
 
-MouseMeasure is a local Windows utility for measuring displacement with an optical
-mouse. Take a crooked path between two points and read the straight distance
-between them, separately from the path you travelled.
+## Quick Start
 
-**[Download the Windows application](https://github.com/vivaswann/MouseMeasure/releases/download/v1.2.0/MouseMeasure-Windows-1.2.0.zip)**
-— extract the ZIP and open `MouseMeasure.exe`. No Python installation is needed.
-See the [release notes and checksums](https://github.com/vivaswann/MouseMeasure/releases/tag/v1.2.0).
+1. **Enter your mouse’s current DPI.**
+2. **Double-left-click** at the starting point.
+3. **Slide to the endpoint**, keeping the mouse facing the same direction and flat on the surface.
+4. **Double-left-click again** to finish. Read the distance in **mm, cm, metres, or inches**.
 
-![The first-launch measuring guide](docs/guide-1.png)
+**Enter** also starts/finishes · **Escape** cancels · **R** resets.
 
-## Start measuring
+## Download & run
 
-1. Open MouseMeasure and follow the illustrated guide.
-2. Enter your mouse's hardware DPI, or calibrate against a ruler.
-3. Align the centre of the scroll wheel or a fixed body mark with the first edge.
-4. Double-left-click, slide to the other edge **without rotating or lifting**, and
-   double-left-click again. Use the same mark for both alignments.
+**[↓ Download for Windows](https://github.com/vivaswann/MouseMeasure/releases/download/v1.2.0/MouseMeasure-Windows-1.2.0.zip)**
 
-The pointer hides and stays inside the graph during recording. **Enter** also
-starts/finishes, **Escape** cancels, and **R** resets. The result table shows direct
-and travelled lengths in **mm, cm, metres, and inches** together.
+Extract the ZIP and open `MouseMeasure.exe`. **No Python installation required.**
+Windows 11 x64 · [Release notes & checksums](https://github.com/vivaswann/MouseMeasure/releases/tag/v1.2.0)
 
-The optical sensor is underneath the mouse. A wheel or body mark is an alignment
-aid: its offset cancels only when you keep the same mouse orientation. The app
-cannot recover rotation or motion lost during lift-off. DPI-based lengths are
-estimates; ruler calibration refines their scale. No total accuracy is claimed.
+## Same mark. Same direction.
 
-## Features
+Align the centre of the scroll wheel—or another fixed mark—with each edge.
+Keep the mouse’s orientation unchanged. The built-in guide walks you through it.
 
-- Raw Input acquisition, independent of pointer speed and screen edges.
-- Live trajectory, endpoint markers, direct line, zoom, pan, and fit.
-- Animated first-launch lessons with pause control and a replayable Guide.
-- Per-device DPI setup, optional ruler calibration, and honest uncertainty labels.
-- Light/dark appearance, local diagnostics and JSON export, optional serial yaw.
-- No telemetry, account requirement, or uploads.
+![Align the same mouse mark with both edges](docs/guide-1.png)
 
-## Run from source
+## A crooked path. A straight answer.
 
-Windows 11 x64 and Python 3.13 are the tested development configuration.
+- **Direct distance** measures from your start point to your endpoint.
+- **Travelled path** shows how far you actually moved.
+- **Stay in the flow:** the pointer hides and stays inside the graph while recording.
+- **Keep it local:** light/dark themes, JSON exports, and no telemetry.
+
+> **Know the limits:** DPI-based lengths are estimates. Optional ruler calibration
+> refines the scale. Don’t rotate or lift the mouse during a measurement;
+> neither DPI nor calibration can recover that missing information.
+
+<details>
+<summary><strong>Run from source</strong></summary>
 
 ```powershell
 git clone https://github.com/vivaswann/MouseMeasure.git
@@ -50,11 +50,10 @@ py -3.13 -m venv .venv
 .venv\Scripts\python.exe bootstrap.py
 ```
 
-`Launch MouseMeasure.bat` launches a packaged executable when present and otherwise
-sets up the source environment. Python 3.11+ may work with compatible wheels;
-the Windows checks use Python 3.13.
+</details>
 
-## Develop and build
+<details>
+<summary><strong>Test & build</strong></summary>
 
 ```powershell
 .venv\Scripts\python.exe -m ruff check .
@@ -63,19 +62,11 @@ the Windows checks use Python 3.13.
 .\build.ps1 -Python .venv\Scripts\python.exe
 ```
 
-The native cursor test requires an interactive desktop; CI uses
-`pytest -m "not desktop"`. The build workflow produces a Windows application
-artifact on version tags or manual dispatch. Executables are unsigned and kept
-out of Git history.
+The native cursor test requires an interactive Windows desktop.
+Headless runners use `pytest -m "not desktop"`. Executables are unsigned.
 
-## Learn more
+</details>
 
-- [Measuring, calibration, DPI detection and limitations](docs/USAGE.md)
-- [Contributing and architecture rules](CONTRIBUTING.md)
-- [Validation scope](docs/VALIDATION.md)
-- [Changes](CHANGELOG.md) · [Security](SECURITY.md)
+[Full guide](docs/USAGE.md) · [Contribute](CONTRIBUTING.md) · [Validation](docs/VALIDATION.md) · [Changelog](CHANGELOG.md)
 
-## License
-
-MouseMeasure source is [MIT licensed](LICENSE). Qt/PySide6 and other bundled
-dependencies retain their own licenses; see [third-party notices](THIRD_PARTY_NOTICES.md).
+**Open source · [MIT license](LICENSE)** · [Third-party notices](THIRD_PARTY_NOTICES.md)
