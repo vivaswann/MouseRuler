@@ -33,10 +33,10 @@ mouse detection does not establish wheel diameter or physical accuracy.
 
 ## Download & run
 
-**[↓ Download for Windows](https://github.com/vivaswann/MouseRuler/releases/download/v1.4.0/MouseRuler-Windows-1.4.0.zip)**
+**[↓ Download for Windows](https://github.com/vivaswann/MouseRuler/releases/download/v1.4.1/MouseRuler-Windows-1.4.1.zip)**
 
 Extract the ZIP and open `MouseRuler.exe`. **No Python installation required.**
-Windows 11 x64 · [Release notes & checksums](https://github.com/vivaswann/MouseRuler/releases/tag/v1.4.0)
+Windows 11 x64 · [Release notes & checksums](https://github.com/vivaswann/MouseRuler/releases/tag/v1.4.1)
 
 ## Same mark. Same direction.
 

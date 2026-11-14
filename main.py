@@ -43,7 +43,7 @@ from measurement_state import Measurement, State
 from settings import Settings
 from visualization import TrajectoryCanvas
 
-VERSION = "1.4.0"
+VERSION = "1.4.1"
 
 
 def label(text, name=None, wrap=False):

@@ -239,8 +239,15 @@ class WheelPage(QWidget):
             "Keep the wheel in contact without slipping. Disable free-spin. Backtracking adds to length.\nNo ruler calibration is required. Example wheel dimensions give a rough estimate; improve them in Wheel setup.",
             "subtitle",
         )
-        QApplication.instance().installEventFilter(self)
         self.refresh()
+
+    def showEvent(self, event):
+        super().showEvent(event)
+        QApplication.instance().installEventFilter(self)
+
+    def hideEvent(self, event):
+        QApplication.instance().removeEventFilter(self)
+        super().hideEvent(event)
 
     @staticmethod
     def spin(low, high, value, decimals, suffix):

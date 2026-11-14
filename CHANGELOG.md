@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.4.1
+
+- Scope wheel input filtering to the visible page and detach it during shutdown.
+- Explicitly delete test widgets before QApplication teardown to keep hosted Windows checks stable.
+
+
 ## 1.4.0
 
 - Added independent wheel-path measurement with four-unit results and keyboard controls.
