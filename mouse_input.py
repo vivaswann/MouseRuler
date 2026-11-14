@@ -87,6 +87,9 @@ def decode_mouse(data: bytes, device: str, timestamp: float) -> RawPacket | None
         timestamp,
         bool(mouse.flags & 1),
         bool(mouse.flags & 4),
+        C.c_int16(mouse.buttons.parts.data).value
+        if mouse.buttons.parts.flags & 0x0400
+        else 0,
     )
 
 

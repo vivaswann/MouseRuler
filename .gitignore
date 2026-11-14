@@ -14,3 +14,5 @@ DEVELOPMENT_LOG.md
 SHA256SUMS.txt
 **/DISTRIBUTION_METADATA.txt
 TEST_REPORT.md
+
+.wheel-local-data/

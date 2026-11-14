@@ -144,6 +144,49 @@ def run(app, report_path):
             )
             window.reset()
             check("Reset leaves cursor released", not window.cursor_capture.active)
+            window.navigate(3)
+            wheel = window.wheel_page
+            wheel.feed(RawPacket("synthetic-wheel", wheel_delta=120))
+            wheel.toggle()
+            wheel.feed(RawPacket("synthetic-wheel", dx=9999, wheel_delta=2880))
+            wheel.toggle()
+            from math import pi
+
+            check(
+                "Wheel works without ruler calibration or DPI",
+                abs(wheel.engine.distance_mm - 24 * pi) < 1e-8,
+            )
+            check(
+                "Wheel optical movement isolation",
+                window.measurement.trajectory.raw_x == 0,
+            )
+            check(
+                "Wheel four-unit results",
+                wheel.values["mm"].text() == f"{24 * pi:.3f}"
+                and wheel.values["in"].text() == f"{24 * pi / 25.4:.3f}",
+            )
+            check("Wheel example scale is labelled", "ASSUMED" in wheel.source.text())
+            from wheel_page import WheelTurnDialog
+
+            turn = WheelTurnDialog("synthetic-wheel", wheel)
+            turn.toggle()
+            turn.feed(RawPacket("synthetic-wheel", wheel_delta=2880))
+            turn.toggle()
+            check(
+                "One-turn counter reports rotation increments",
+                turn.travel / 120 == 24 and turn.use_button.isEnabled(),
+            )
+            turn.close()
+            from PySide6.QtGui import QImage
+
+            from wheel_guide import WheelIllustration
+
+            drawing = WheelIllustration()
+            drawing.resize(800, 300)
+            image = QImage(800, 300, QImage.Format.Format_ARGB32)
+            drawing.render(image)
+            check("Packaged wheel animation renders", not image.isNull())
+            drawing.close()
             window.close()
             window = None
         report["status"] = "passed"

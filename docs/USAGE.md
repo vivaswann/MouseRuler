@@ -1,5 +1,9 @@
 # Using MouseRuler
 
+For the independent scroll-wheel method, see [Wheel measurement](WHEEL.md).
+The instructions below describe optical slide measurement.
+
+
 A Windows 11 x64 utility that measures mouse-sensor displacement using Windows Raw Input. It draws the reported trajectory and shows **direct endpoint distance separately from travelled path length**.
 
 ## Launch and first measurement

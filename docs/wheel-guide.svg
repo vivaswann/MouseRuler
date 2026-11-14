@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="282.222mm" height="105.833mm"
+ viewBox="0 0 800 300"
+ xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.2" baseProfile="tiny">
+<title>MouseRuler wheel measurement: roll with continuous surface contact</title>
+<desc>Generated with Qt</desc>
+<defs>
+</defs>
+<g fill="none" stroke="black" stroke-width="1" fill-rule="evenodd" stroke-linecap="square" stroke-linejoin="bevel" >
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="Sans Serif" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="#efefef" fill-opacity="1" stroke="none" transform="matrix(1,0,0,1,0,0)"
+font-family="Sans Serif" font-size="9" font-weight="400" font-style="normal" 
+>
+<rect x="0" y="0" width="800" height="300"/>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="Sans Serif" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+
+<g fill="#edf2eb" fill-opacity="1" stroke="none" transform="matrix(1,0,0,1,0,0)"
+font-family="Sans Serif" font-size="9" font-weight="400" font-style="normal" 
+>
+<path vector-effect="none" fill-rule="evenodd" d="M0,18 C0,8.05887 8.05887,0 18,0 L782,0 C791.941,0 800,8.05887 800,18 L800,282 C800,291.941 791.941,300 782,300 L18,300 C8.05887,300 0,291.941 0,282 L0,18 Z "/>
+</g>
+
+<g fill="#edf2eb" fill-opacity="1" stroke="#6f8275" stroke-opacity="1" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="Segoe UI" font-size="11" font-weight="400" font-style="normal" 
+>
+<polyline fill="none" vector-effect="none" points="70,203 730,203 " />
+</g>
+
+<g fill="#edf2eb" fill-opacity="1" stroke="#6f8275" stroke-opacity="1" stroke-dasharray="4,2" stroke-dashoffset="0" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="Segoe UI" font-size="11" font-weight="400" font-style="normal" 
+>
+<polyline fill="none" vector-effect="none" points="140,65 140,220 " />
+<polyline fill="none" vector-effect="none" points="660,65 660,220 " />
+</g>
+
+<g fill="#d9e3d5" fill-opacity="1" stroke="#315441" stroke-opacity="1" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="Segoe UI" font-size="11" font-weight="400" font-style="normal" 
+>
+<path vector-effect="none" fill-rule="evenodd" d="M352.8,173 C347.8,90 452.8,95 485.8,173 L352.8,173 Z "/>
+</g>
+
+<g fill="#e1ebe1" fill-opacity="1" stroke="#315e49" stroke-opacity="1" stroke-width="3" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="Segoe UI" font-size="11" font-weight="400" font-style="normal" 
+>
+<circle cx="472.8" cy="185" r="18"/>
+<polyline fill="none" vector-effect="none" points="472.8,185 485.899,180.059 " />
+<polyline fill="none" vector-effect="none" points="472.8,185 483.628,193.874 " />
+<polyline fill="none" vector-effect="none" points="472.8,185 470.529,198.815 " />
+<polyline fill="none" vector-effect="none" points="472.8,185 459.701,189.941 " />
+<polyline fill="none" vector-effect="none" points="472.8,185 461.972,176.126 " />
+<polyline fill="none" vector-effect="none" points="472.8,185 475.071,171.185 " />
+</g>
+
+<g fill="#e1ebe1" fill-opacity="1" stroke="#668fa9" stroke-opacity="1" stroke-width="3" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="Segoe UI" font-size="11" font-weight="400" font-style="normal" 
+>
+<polyline fill="none" vector-effect="none" points="140,203 472.8,203 " />
+</g>
+
+<g fill="#e1ebe1" fill-opacity="1" stroke="#315441" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="Segoe UI" font-size="11" font-weight="400" font-style="normal" 
+>
+<text fill="#315441" fill-opacity="1" stroke="none" xml:space="preserve" x="269.5" y="48" font-family="Segoe UI" font-size="11" font-weight="400" font-style="normal" 
+ >SIDE VIEW · WHEEL CONTACTS THE SURFACE</text>
+<text fill="#315441" fill-opacity="1" stroke="none" xml:space="preserve" x="107" y="263.5" font-family="Segoe UI" font-size="11" font-weight="400" font-style="normal" 
+ >START MARK</text>
+<text fill="#315441" fill-opacity="1" stroke="none" xml:space="preserve" x="622.5" y="263.5" font-family="Segoe UI" font-size="11" font-weight="400" font-style="normal" 
+ >END MARK</text>
+</g>
+
+<g fill="#e1ebe1" fill-opacity="1" stroke="#6f8275" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="Segoe UI" font-size="11" font-weight="400" font-style="normal" 
+>
+<text fill="#6f8275" fill-opacity="1" stroke="none" xml:space="preserve" x="334" y="263.5" font-family="Segoe UI" font-size="11" font-weight="400" font-style="normal" 
+ >Enter → roll → Enter</text>
+</g>
+
+<g fill="none" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(1,0,0,1,0,0)"
+font-family="Sans Serif" font-size="9" font-weight="400" font-style="normal" 
+>
+</g>
+</g>
+</svg>

@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.4.0
+
+- Added independent wheel-path measurement with four-unit results and keyboard controls.
+- Added animated wheel lessons, a compact setup panel, automatic settings saving, and a one-turn step counter.
+- Read-only HID mouse names and manufacturer-sourced partial model hints; receiver identities and unknown wheel diameters remain explicitly unresolved.
+- Preserved optical measurement, DPI setup, ruler calibration, and existing saved settings.
+
+
 ## 1.3.0
 
 - Renamed the app, repository, builds, exports, documentation, and releases to MouseRuler.

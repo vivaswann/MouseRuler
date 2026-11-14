@@ -13,6 +13,7 @@ class RawPacket:
     timestamp: float = 0.0
     absolute: bool = False
     attributes_changed: bool = False
+    wheel_delta: int = 0
 
 
 class DoubleClickDetector:

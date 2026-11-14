@@ -7,7 +7,7 @@ distance between two points—even when you take a crooked path.
 
 **[Website & quick guide](https://vivaswann.github.io/MouseRuler/)** · [How to measure without a ruler](https://vivaswann.github.io/MouseRuler/how-to-measure-without-a-ruler.html)
 
-## Quick Start
+## Quick Start · slide measurement
 
 1. **Enter your mouse’s current DPI.**
 2. **Double-left-click** at the starting point.
@@ -16,12 +16,27 @@ distance between two points—even when you take a crooked path.
 
 **Enter** also starts/finishes · **Escape** cancels · **R** resets.
 
+## New: roll your scroll wheel along an object
+
+Choose **Wheel**, roll once to select your mouse, then **Start → roll → Enter**.
+Read the rolled-path estimate in mm, cm, metres, and inches. No mouse DPI or ruler
+calibration is required for wheel mode.
+
+**How to roll** opens an animated guide. **Wheel setup** offers device-name
+identification, source-linked model hints, a one-turn step counter, and saved
+settings. Example dimensions remain clearly labelled as rough estimates;
+mouse detection does not establish wheel diameter or physical accuracy.
+
+![Roll the exposed wheel along the surface without slipping](docs/wheel-guide.svg)
+
+[Wheel guide and limitations](docs/WHEEL.md) · [Mouse specification sources](docs/MOUSE_PROFILES.md)
+
 ## Download & run
 
-**[↓ Download for Windows](https://github.com/vivaswann/MouseRuler/releases/download/v1.3.0/MouseRuler-Windows-1.3.0.zip)**
+**[↓ Download for Windows](https://github.com/vivaswann/MouseRuler/releases/download/v1.4.0/MouseRuler-Windows-1.4.0.zip)**
 
 Extract the ZIP and open `MouseRuler.exe`. **No Python installation required.**
-Windows 11 x64 · [Release notes & checksums](https://github.com/vivaswann/MouseRuler/releases/tag/v1.3.0)
+Windows 11 x64 · [Release notes & checksums](https://github.com/vivaswann/MouseRuler/releases/tag/v1.4.0)
 
 ## Same mark. Same direction.
 

@@ -28,6 +28,7 @@ from PySide6.QtWidgets import (
     QMainWindow,
     QPlainTextEdit,
     QPushButton,
+    QScrollArea,
     QStackedWidget,
     QVBoxLayout,
     QWidget,
@@ -42,7 +43,7 @@ from measurement_state import Measurement, State
 from settings import Settings
 from visualization import TrajectoryCanvas
 
-VERSION = "1.3.0"
+VERSION = "1.4.0"
 
 
 def label(text, name=None, wrap=False):
@@ -131,7 +132,7 @@ class MainWindow(QMainWindow):
         nav.addWidget(label("MouseRuler", "brand"))
         nav.addStretch()
         self.nav_buttons = []
-        for i, text in enumerate(("Measurement", "Calibration", "Settings")):
+        for i, text in enumerate(("Measurement", "Calibration", "Settings", "Wheel")):
             btn = button(text, lambda checked=False, index=i: self.navigate(index))
             btn.setObjectName("nav")
             btn.setCheckable(True)
@@ -150,6 +151,18 @@ class MainWindow(QMainWindow):
         self.pages.addWidget(self._measurement_page())
         self.pages.addWidget(self._calibration_page())
         self.pages.addWidget(self._settings_page())
+        from wheel_page import WheelPage
+
+        self.wheel_page = WheelPage(
+            self.settings.path.parent / "wheel-geometry.json",
+            self,
+            hardware_enabled=self._requires_raw,
+        )
+        wheel_scroll = QScrollArea()
+        wheel_scroll.setWidgetResizable(True)
+        wheel_scroll.setFrameShape(QFrame.Shape.NoFrame)
+        wheel_scroll.setWidget(self.wheel_page)
+        self.pages.addWidget(wheel_scroll)
         outer.addWidget(self.pages, 1)
         self.message = label("", "message", True)
         self.message.hide()
@@ -300,8 +313,16 @@ class MainWindow(QMainWindow):
         return value
 
     def show_guide(self):
+        if self.wheel_page.engine.active:
+            self.notice(
+                "Finish wheel measurement or press Escape before opening the guide."
+            )
+            return
         if self.measurement.state == State.RECORDING:
             self.notice("Finish or cancel before opening the guide.")
+            return
+        if self.page_index == 3:
+            self.wheel_page.show_guide()
             return
         from onboarding import WelcomeGuide
 
@@ -503,18 +524,39 @@ class MainWindow(QMainWindow):
             self.shortcuts.append(shortcut)
 
     def keyboard_command(self):
+        if self.page_index == 3:
+            if self.wheel_page.turn_dialog:
+                return
+            if not isinstance(
+                QApplication.focusWidget(), (QLineEdit, QAbstractSpinBox)
+            ):
+                self.wheel_page.toggle()
+            return
         if self.page_index < 2 and not isinstance(
             QApplication.focusWidget(), (QLineEdit, QAbstractSpinBox)
         ):
             self.command_button()
 
     def keyboard_reset(self):
+        if self.page_index == 3:
+            if not isinstance(
+                QApplication.focusWidget(), (QLineEdit, QAbstractSpinBox)
+            ):
+                self.wheel_page.reset()
+            return
         if self.page_index < 2 and not isinstance(
             QApplication.focusWidget(), (QLineEdit, QAbstractSpinBox)
         ):
             self.reset()
 
     def navigate(self, index):
+        if self.wheel_page.engine.active:
+            self.notice(
+                "Finish wheel measurement or press Escape before changing pages."
+            )
+            self.nav_buttons[index].setChecked(index == self.page_index)
+            self.nav_buttons[self.page_index].setChecked(True)
+            return
         if self.measurement.state == State.RECORDING:
             self.notice("Finish the measurement or press Escape before changing pages.")
             self.nav_buttons[index].setChecked(False)
@@ -530,7 +572,7 @@ class MainWindow(QMainWindow):
         self._dirty = True
 
     def _click_allowed(self):
-        if self.page_index == 2 or QApplication.activeModalWidget():
+        if self.page_index >= 2 or QApplication.activeModalWidget():
             return False
         if self.cursor_capture.active:
             # Captured clicks are measurement commands even if the invisible
@@ -572,6 +614,18 @@ class MainWindow(QMainWindow):
         return self.isActiveWindow()
 
     def on_packet(self, packet):
+        if self.page_index == 3:
+            if self.wheel_page.turn_dialog:
+                if self.wheel_page.turn_dialog.isActiveWindow():
+                    self.wheel_page.turn_dialog.feed(packet)
+                return
+            if self.isActiveWindow() and not QApplication.activeModalWidget():
+                self.wheel_page.feed(packet)
+            else:
+                self.wheel_page.interrupt(
+                    "Wheel recording interrupted by focus loss. Partial result discarded."
+                )
+            return
         self.router.feed(packet, self._click_allowed())
         if self.measurement.state != State.RECORDING:
             self.cursor_capture.release()
@@ -740,6 +794,9 @@ class MainWindow(QMainWindow):
         self._dirty = True
 
     def cancel(self):
+        if self.page_index == 3:
+            self.wheel_page.reset()
+            return
         self.cursor_capture.release()
         if self.measurement.state == State.RECORDING:
             self.measurement.cancel()
@@ -804,6 +861,8 @@ class MainWindow(QMainWindow):
         self.message.show()
 
     def tracking_error(self, text):
+        if hasattr(self, "wheel_page"):
+            self.wheel_page.interrupt(text)
         self.cursor_capture.release()
         logging.error(text)
         self.router.error(text)
@@ -813,6 +872,12 @@ class MainWindow(QMainWindow):
         self._dirty = True
 
     def device_removed(self, device):
+        if device == self.wheel_page.engine.device:
+            self.wheel_page.interrupt(
+                "Wheel mouse disconnected. Partial result discarded."
+            )
+            self.wheel_page.engine.device = ""
+            self.wheel_page.refresh()
         if device == self.measurement.device:
             self.tracking_error(
                 "Selected mouse disconnected. Reconnect, reset, and check calibration."
@@ -1121,6 +1186,10 @@ class MainWindow(QMainWindow):
         if event.type() == QEvent.Type.ActivationChange and hasattr(
             self, "cursor_capture"
         ):
+            if hasattr(self, "wheel_page") and not self.isActiveWindow():
+                self.wheel_page.interrupt(
+                    "Wheel recording interrupted: window lost focus. Partial result discarded."
+                )
             if self.cursor_capture.active and not self.isActiveWindow():
                 self.cursor_capture.release(restore_previous=False)
                 self.tracking_error(
@@ -1128,6 +1197,7 @@ class MainWindow(QMainWindow):
                 )
 
     def closeEvent(self, event):
+        self.wheel_page.shutdown()
         self.cursor_capture.release()
         self.timer.stop()
         if self.native:
@@ -1152,6 +1222,11 @@ def main():
         help="Run a hidden software self-test, then exit; not a physical accuracy test",
     )
     parser.add_argument("--report", help="JSON output path required with --self-test")
+    parser.add_argument(
+        "--wheel",
+        action="store_true",
+        help="Open the independent wheel measurement tab",
+    )
     args = parser.parse_args()
     pg.setConfigOptions(antialias=True)
     app = QApplication(sys.argv[:1])
@@ -1186,6 +1261,9 @@ def main():
 
         return run(app, args.report)
     window = MainWindow(settings)
+    if args.wheel:
+        window.navigate(3)
+        window.setWindowTitle("MouseRuler · Wheel")
     icon_path = (
         Path(getattr(sys, "_MEIPASS", Path(__file__).parent))
         / "assets"
@@ -1197,7 +1275,7 @@ def main():
         window.show()
     else:
         window.showMaximized()
-    if settings.show_guide:
+    if settings.show_guide and not args.wheel:
         QTimer.singleShot(200, window.show_guide)
     return app.exec()
 

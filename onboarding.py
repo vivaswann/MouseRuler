@@ -181,9 +181,10 @@ class MeasurementIllustration(QWidget):
 
 
 class WelcomeGuide(QDialog):
-    def __init__(self, settings, parent=None):
+    def __init__(self, settings, parent=None, lessons=None, illustration_type=None):
         super().__init__(parent)
         self.settings = settings
+        self.lessons = lessons if lessons is not None else LESSONS
         self.step = 0
         self.setWindowTitle("A quick guide to MouseRuler")
         self.resize(880, 640)
@@ -204,7 +205,9 @@ class WelcomeGuide(QDialog):
         layout.addWidget(self.counter)
         layout.addWidget(self.title)
         layout.addWidget(self.body)
-        self.illustration = MeasurementIllustration(settings.theme == "Dark")
+        self.illustration = (illustration_type or MeasurementIllustration)(
+            settings.theme == "Dark"
+        )
         layout.addWidget(self.illustration, 1)
         info = QHBoxLayout()
         caption = QLabel("Illustration only · no live measurement data")
@@ -230,17 +233,19 @@ class WelcomeGuide(QDialog):
         self.render_step()
 
     def render_step(self):
-        counter, title, body = LESSONS[self.step]
+        counter, title, body = self.lessons[self.step]
         self.counter.setText(counter)
         self.title.setText(title)
         self.body.setText(body)
         self.illustration.set_step(self.step)
         self.back.setEnabled(self.step > 0)
-        self.next.setText("Start measuring" if self.step == 2 else "Next  →")
+        self.next.setText(
+            "Start measuring" if self.step == len(self.lessons) - 1 else "Next  →"
+        )
 
     def go(self, direction):
-        if direction > 0 and self.step == 2:
+        if direction > 0 and self.step == len(self.lessons) - 1:
             self.accept()
             return
-        self.step = max(0, min(2, self.step + direction))
+        self.step = max(0, min(len(self.lessons) - 1, self.step + direction))
         self.render_step()
